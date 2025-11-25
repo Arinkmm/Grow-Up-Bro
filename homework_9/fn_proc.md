@@ -29,7 +29,7 @@ $$;
 CALL add_plant('Спатифиллум','Неприхотливое комнатное растение с красивыми белыми соцветиями',2, 2, 2, 2, 1, 2, 3);
 ```
 
-![[homework_9/images/1.1.png]]
+![Результат выполнения запроса](images/1.1.png)
 
 1.2. Обновление инструкции по использованию удобрения для растения
 
@@ -50,7 +50,7 @@ $$;
 CALL update_fertilizer_usage_for_plant(1, 'Используйте ранней весной для стимуляции роста побегов');
  ```
 
-![[homework_9/images/1.2.png]]
+![Результат выполнения запроса](images/1.2.png)
 
 1.3. Обновление уровня сложности у растений, если оно не назначено
 
@@ -70,11 +70,11 @@ CALL safe_assign_difficulty(1);
 
 До:
 
-![[1.3. before.png]]
+![Результат выполнения запроса](images/1.3. before.png)
 
 Результат выполнения:
 
-![[1.3. after.png]]
+![Результат выполнения запроса](images/1.3. after.png)
 
 Просмотр всех процедур:
 
@@ -84,7 +84,7 @@ FROM information_schema.routines
 WHERE routine_type = 'PROCEDURE' AND routine_schema = 'public';
 ```
 
-![[procedures.png]]
+![Результат выполнения запроса](images/procedures.png)
 
 2. Функции
 
@@ -103,7 +103,7 @@ $$;
 SELECT get_plant_name(1) AS plant_name;
 ```
 
-![[homework_9/images/2.1.png]]
+![Результат выполнения запроса](images/2.1.png)
 
 2.2. Подсчёт количества растений с конкретным уровнем сложности
 
@@ -120,7 +120,7 @@ $$;
 SELECT count_plants_by_difficulty(2) AS count_of_plants;
 ```
 
-![[homework_9/images/2.2.png]]
+![Результат выполнения запроса](images/2.2.png)
 
 2.3. Получение инструкции удобрения по ID растения
 
@@ -140,7 +140,7 @@ $$;
 SELECT get_fertilizer_usage_by_plant(1) AS fertilizer_usage_by_plant;
 ```
 
-![[homework_9/images/2.3.png]]
+![Результат выполнения запроса](images/2.3.png)
 
 Функции с переменными
 
@@ -162,7 +162,7 @@ $$;
 SELECT is_plant_difficulty(1, 1) AS plant_difficulty;
 ```
 
-![[2.4.png]]
+![Результат выполнения запроса](images/2.4.png)
 
 2.5.  Получение количества советов для растения
 
@@ -184,7 +184,7 @@ $$;
 SELECT count_advice_for_plant(1) AS count_of_advice;
 ```
 
-![[2.5.png]]
+![Результат выполнения запроса](images/2.5.png)
 
 2.6. Получение количества растений с определённым типом освещения
 
@@ -204,7 +204,7 @@ $$;
 SELECT count_plants_by_sunlight(1) AS count_of_plant;
 ```
 
-![[2.6.png]]
+![Результат выполнения запроса](images/2.6.png)
 
 Просмотр всех функций:
 
@@ -214,7 +214,7 @@ FROM information_schema.routines
 WHERE routine_type = 'FUNCTION' AND routine_schema = 'public';
 ```
 
-![[functions.png]]
+![Результат выполнения запроса](images/functions.png)
 
 3. Блок DO
 
@@ -229,7 +229,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[3.1 1.png]]
+![Результат выполнения запроса](images/3.1.png)
 
 3.2. Обновление удобрения у растений, если удобрение не назначено
 
@@ -245,11 +245,11 @@ $$ LANGUAGE plpgsql;
 
 До:
 
-![[3.2 before.png]]
+![Результат выполнения запроса](images/3.2. before.png)
 
 Результат выполнения:
 
-![[3.2. after.png]]
+![Результат выполнения запроса](images/3.2. after.png)
 
 3.3. Удаление уровней сложности без растений
 
@@ -264,11 +264,11 @@ $$ LANGUAGE plpgsql;
 
 До:
 
-![[3.3. before.png]]
+![Результат выполнения запроса](images/3.3. before.png)
 
 Результат выполнения:
 
-![[3.3. after.png]]
+![Результат выполнения запроса](images/3.3. after.png)
 
 4. IF
 
@@ -303,7 +303,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[4.png]]
+![Результат выполнения запроса](images/4.png)
 
 5. CASE
 
@@ -328,7 +328,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[5.png]]
+![Результат выполнения запроса](images/5.png)
 
 6. WHILE
 
@@ -350,11 +350,11 @@ $$ LANGUAGE plpgsql;
 
 До:
 
-![[6.1. before.png]]
+![Результат выполнения запроса](images/6.1. before.png)
 
 Результат выполнения:
 
-![[6.1. after.png]]
+![Результат выполнения запроса](images/6.1. after.png)
 
 6.2. Обновление уровня безопасности у растений с определённым значением
 
@@ -374,11 +374,11 @@ $$ LANGUAGE plpgsql;
 
 До:
 
-![[6.2. before.png]]
+![Результат выполнения запроса](images/6.2. before.png)
 
 Результат выполнения:
 
-![[6.2. after.png]]
+![Результат выполнения запроса](images/6.2. after.png)
 
 7.  EXCEPTION
 
@@ -397,7 +397,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[homework_9/images/7.1.png]]
+![Результат выполнения запроса](images/7.1.png)
 
 7.2. Попытка добавить растение, если уже есть такое имя — выводим предупреждение
 
@@ -421,7 +421,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[homework_9/images/7.2.png]]
+![Результат выполнения запроса](images/7.2.png)
 
 8. RAISE
 
@@ -442,7 +442,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[homework_9/images/8.1.png]]
+![Результат выполнения запроса](images/8.1.png)
 
 8.2. Сообщение об ошибке, если попытка добавить растение с размером вне диапазона 1–3
 
@@ -467,4 +467,4 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-![[homework_9/images/8.2.png]]
+![Результат выполнения запроса](images/8.2.png)
