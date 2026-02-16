@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: pg_growupbro
+    environment:
+      POSTGRES_DB: GrowUpBro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 08122006Ar
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  flyway:
+    image: flyway/flyway
+    depends_on:
+      - postgres
+    command:
+      - "migrate"
+      - "-baselineOnMigrate=true"
+    volumes:
+      - ./db/migrations:/flyway/sql
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/GrowUpBro
+      FLYWAY_USER: postgres
+      FLYWAY_PASSWORD: 08122006Ar
+      FLYWAY_BASELINE_VERSION: 1
+      FLYWAY_BASELINE_DESCRIPTION: "Initial baseline"
+      FLYWAY_SCHEMAS: main,refs,links
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mairabeeva42@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 08122006Ar
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  pg_data:
