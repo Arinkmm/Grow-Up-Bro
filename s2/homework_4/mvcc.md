@@ -203,6 +203,7 @@ SELECT relname, n_live_tup, n_dead_tup
 FROM pg_stat_user_tables WHERE relname = 'plant';
 ```
 ![6.2.png](images/6.2.png)
+
 Мертвые кортежи очистились
 
 Замеряем размер повторно
@@ -210,4 +211,5 @@ FROM pg_stat_user_tables WHERE relname = 'plant';
 SELECT pg_size_pretty(pg_total_relation_size('main.plant'));
 ```
 ![size_6.2.png](images/size_6.2.png)
+
 Размер не изменился
