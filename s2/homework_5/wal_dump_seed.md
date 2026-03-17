@@ -110,7 +110,7 @@ SELECT pg_size_pretty(pg_wal_lsn_diff('0/69F92378', '0/3AAD8470')) AS total_wal_
 
 ### 2. Dump одной таблицы
 
-С помощью флага -t ыгружаем только таблицу `refs.sunlight`
+С помощью флага -t выгружаем только таблицу `refs.sunlight`
 
 ```
 & "C:\Program Files\PostgreSQL\17\bin\pg_dump.exe" -U postgres -t refs.sunlight -d GrowUpBro -f sunlight_table.sql   
