@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:17
-    container_name: pg_growupbro
+    container_name: pg_growupbro2
     environment:
       POSTGRES_DB: GrowUpBro
       POSTGRES_USER: postgres

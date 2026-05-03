@@ -19,7 +19,7 @@ services:
       - "migrate"
       - "-baselineOnMigrate=true"
     volumes:
-      - ./db/migrations:/flyway/sql
+      - ./migrations:/flyway/sql
     environment:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/GrowUpBro
       FLYWAY_USER: postgres
