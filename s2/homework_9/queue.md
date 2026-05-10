@@ -162,7 +162,7 @@ pgConnection.getNotifications(1000);
 
 Таким образом вместо постоянного polling консьюмеры переходят в режим ожидания и получают сигнал о появлении новых задач через механизм PostgreSQL LISTEN / NOTIFY
 
-## 11. Bloat и VACUUM
+## 7. Bloat и VACUUM
 
 Для таблицы очереди настроен более агрессивный autovacuum:
 
