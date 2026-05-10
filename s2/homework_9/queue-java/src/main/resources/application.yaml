@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/GrowUpBro
+    username: postgres
+    password: 08122006Ar
+    driver-class-name: org.postgresql.Driver
+
+app:
+  mode: monitor
+  producer:
+    rate-per-second: 300
+  consumer:
+    name: consumer-1
+    fail-probability: 0.15
+    sleep-ms: 100
+  max-attempts: 5

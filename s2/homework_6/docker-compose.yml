@@ -27,14 +27,14 @@ services:
     command:
       - "migrate"
     volumes:
-      - ../homework_1/migrations:/flyway/sql
+      - ../migrations:/flyway/sql
     environment:
       FLYWAY_URL: jdbc:postgresql://master:5432/GrowUpBro
       FLYWAY_USER: postgres
       FLYWAY_PASSWORD: pass
       FLYWAY_BASELINE_VERSION: 1
       FLYWAY_BASELINE_DESCRIPTION: "Initial baseline"
-      FLYWAY_SCHEMAS: main,refs,links
+      FLYWAY_SCHEMAS: main,refs,links,queue
 
 #  logical:
 #    image: postgres:17

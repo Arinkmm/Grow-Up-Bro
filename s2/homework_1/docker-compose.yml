@@ -19,14 +19,14 @@ services:
       - "migrate"
       - "-baselineOnMigrate=true"
     volumes:
-      - ./migrations:/flyway/sql
+      - ../migrations:/flyway/sql
     environment:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/GrowUpBro
       FLYWAY_USER: postgres
       FLYWAY_PASSWORD: 08122006Ar
       FLYWAY_BASELINE_VERSION: 1
       FLYWAY_BASELINE_DESCRIPTION: "Initial baseline"
-      FLYWAY_SCHEMAS: main,refs,links
+      FLYWAY_SCHEMAS: main,refs,links,queue
 
   pgadmin:
     image: dpage/pgadmin4

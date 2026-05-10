@@ -78,7 +78,10 @@ ALTER TABLE links.plant_tip OWNER TO postgres;
 
 CREATE TABLE main.advice (
     id integer NOT NULL,
-    tip_text text NOT NULL
+    tip_text text NOT NULL,
+    author VARCHAR(100),
+    rating INT,
+    is_verified BOOLEAN
 );
 
 
@@ -92,7 +95,8 @@ CREATE TABLE main.fertilizer (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     usage text,
-    type character varying(100)
+    type character varying(100),
+    brand VARCHAR(100)
 );
 
 
@@ -134,7 +138,11 @@ CREATE TABLE main.plant (
     safety_id integer,
     difficulty_id integer,
     size_id integer,
-    fertilizer_id integer
+    fertilizer_id integer,
+    specs JSONB,
+    planting_season DATERANGE,
+    origin_location POINT,
+    description_ts tsvector
 );
 
 
