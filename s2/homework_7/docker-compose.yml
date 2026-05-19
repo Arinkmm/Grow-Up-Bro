@@ -34,7 +34,7 @@ services:
       FLYWAY_PASSWORD: pass
       FLYWAY_BASELINE_VERSION: 1
       FLYWAY_BASELINE_DESCRIPTION: "Initial baseline"
-      FLYWAY_SCHEMAS: main,refs,links,queue
+      FLYWAY_SCHEMAS: main,refs,links,queue,olap
 
   shard1:
     image: postgres:17
