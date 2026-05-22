@@ -1,0 +1,5 @@
+[
+  {"id": 9000001, "plant_id": 1, "event_type": "Полив", "created_at": "2026-05-22T10:00:00Z"},
+  {"id": 9000002, "plant_id": 2, "event_type": "Удобрение", "created_at": "2026-05-22T11:30:00Z"},
+  {"id": 9000003, "plant_id": 1, "event_type": "Опрыскивание", "created_at": "2026-05-23T15:00:00Z"}
+]

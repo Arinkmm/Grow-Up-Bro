@@ -1,0 +1,121 @@
+version: '3.8'
+
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.8.1
+  environment:
+    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+    - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    - _PIP_ADDITIONAL_REQUIREMENTS=clickhouse-connect==0.7.3
+  volumes:
+    - ./dags:/opt/airflow/dags
+  depends_on:
+    postgres-airflow:
+      condition: service_healthy
+    pg_growupbro:
+      condition: service_started
+
+services:
+  pg_growupbro:
+    image: postgres:17
+    container_name: pg_growupbro
+    environment:
+      POSTGRES_DB: GrowUpBro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 08122006Ar
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  flyway:
+    image: flyway/flyway
+    depends_on:
+      - pg_growupbro
+    command:
+      - "migrate"
+      - "-baselineOnMigrate=true"
+    volumes:
+      - ../migrations:/flyway/sql
+    environment:
+      FLYWAY_URL: jdbc:postgresql://pg_growupbro:5432/GrowUpBro
+      FLYWAY_USER: postgres
+      FLYWAY_PASSWORD: 08122006Ar
+      FLYWAY_BASELINE_VERSION: 1
+      FLYWAY_BASELINE_DESCRIPTION: "Initial baseline"
+      FLYWAY_SCHEMAS: main,refs,links,queue,olap
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mairabeeva42@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 08122006Ar
+    ports:
+      - "5050:80"
+    depends_on:
+      - pg_growupbro
+
+  postgres-airflow:
+    image: postgres:17
+    container_name: postgres-airflow
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse_olap
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+      - CLICKHOUSE_PASSWORD=08122006Ar
+    volumes:
+      - ./init-clickhouse:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8123/ping"]
+      interval: 5s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    command: version
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+      - _AIRFLOW_DB_UPGRADE=true
+      - _AIRFLOW_WWW_USER_CREATE=true
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 10s
+      retries: 5
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+volumes:
+  pg_data:
