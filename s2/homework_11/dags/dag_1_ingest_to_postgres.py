@@ -27,7 +27,6 @@ def ingest_json_events():
               ON CONFLICT (id) DO NOTHING; \
           """
 
-    counter = 0
     for item in events:
         pg_hook.run(sql, parameters=(
             item['id'],
@@ -35,7 +34,6 @@ def ingest_json_events():
             item['event_type'],
             item['created_at']
         ))
-        counter += 1
 
 def ingest_csv_advices():
     if not os.path.exists(CSV_PATH):
@@ -70,7 +68,7 @@ with DAG(
         start_date=datetime(2026, 1, 1),
         schedule="@daily",
         catchup=False,
-        tags=['ingestion', 'postgres', 'kfu_project']
+        tags=['ingestion', 'postgres']
 ) as dag:
 
     task_json = PythonOperator(
