@@ -106,13 +106,13 @@ erDiagram
     }
 
     PLANT_TIP {
-        int plant_id PK FK
-        int tip_id PK FK
+        int plant_id PK, FK
+        int tip_id PK, FK
     }
 
     PLANT_FEATURE {
-        int plant_id PK FK
-        int feature_id PK FK
+        int plant_id PK, FK
+        int feature_id PK, FK
     }
 
     PLANT_CARE_EVENT {
@@ -242,3 +242,9 @@ The Docker Compose file already includes a built-in environment that doesn't con
 ## Why It Matters
 
 This project is a compact record of how a database model can evolve: first as a clean normalized schema, then as a system that has to be queried, indexed, monitored, replicated, partitioned, fed into queues, compared with NoSQL alternatives, and finally analyzed through OLAP pipelines. It keeps the practical learning path visible instead of hiding it behind a finished-only result.
+
+## Support & Contact
+
+Have questions? Need help with setup? Found a bug?
+
+Email: **mairabeeva42@gmail.com** | Telegram: @arinkmm
